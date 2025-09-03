@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Re-Colour Image</title>
+    
+    <!-- Menambahkan font Google untuk tampilan yang lebih unik -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Menghubungkan file CSS eksternal -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* CSS untuk bagian media sosial */
+        .social-media {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+        
+        .social-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.4em;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .linkedin {
+            background-color: #0077B5;
+        }
+        
+        .instagram {
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+        }
+        
+        .facebook {
+            background-color: #3b5998;
+        }
+        
+        .github {
+            background-color: #333333;
+        }
+    </style>
+</head>
+<body>
+
+    <main class="container">
+        <h1>Re-Colour Image</h1>
+        <p class="subtitle">Ikuti Trend Indonesia Gelap</p>
+        
+        <div class="upload-area">
+            <input type="file" id="image-input" accept="image/*" style="display: none;">
+            <label for="image-input" class="upload-label">
+                <div class="upload-icon">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                </div>
+                <span class="upload-text">Unggah Disini!</span>
+                <span class="upload-subtext">PNG, JPG, or WebP (max. 5MB)</span>
+            </label>
+        </div>
+
+        <div id="result-area" class="result-area">
+            <h2 id="result-title" class="result-title">
+                <i class="fas fa-image"></i>
+                <span>Result Preview</span>
+            </h2>
+            <div class="preview-box">
+                <div id="spinner" class="spinner"></div>
+                <img id="preview-image" alt="Processed image preview">
+            </div>
+            <a id="download-btn" class="button" download="recolored-image.png">
+                <i class="fas fa-download"></i>
+                Download Image
+            </a>
+        </div>
+        
+        <!-- Bagian Media Sosial -->
+        <div class="social-media">
+            <a href="https://www.linkedin.com/in/gazahaikal2086/" target="_blank" class="social-icon linkedin">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="https://www.instagram.com/childlimbo/" target="_blank" class="social-icon instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.facebook.com/share/15xzvwZrGe/" target="_blank" class="social-icon facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://github.com/GazaHaikal" target="_blank" class="social-icon github">
+                <i class="fab fa-github"></i>
+            </a>
+        </div>
+        
+        <div class="footer">
+            <p>Present by: Gaza Haikal <i class="fas fa-heart" style="color: #ff3366;"></i> @Copyright</p>
+        </div>
+    </main>
+
+    <canvas id="canvas" style="display: none;"></canvas>
+
+    <!-- Menghubungkan file JavaScript eksternal -->
+    <script src="script.js"></script>
+</body>
+</html>
