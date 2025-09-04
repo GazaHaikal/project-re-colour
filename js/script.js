@@ -8,14 +8,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const canvas = document.getElementById('canvas');
   const ctx = canvas.getContext('2d', { willReadFrequently: true });
 
+  // ---- Konfigurasi ----
+  const MAX_UPLOAD_SIZE_MB = 10;  // Atur maksimal upload (misal 10MB)
+  const AUTO_RESIZE_LIMIT = 3000; // Resize otomatis kalau gambar > 3000px
+
   imageInput.addEventListener('change', handleImageUpload);
 
   function handleImageUpload(event) {
     const file = event.target.files[0];
     if (!file) return;
 
-    if (file.size > 5 * 1024 * 1024) {
-      alert('File size exceeds 5MB. Please choose a smaller image.');
+    if (file.size > MAX_UPLOAD_SIZE_MB * 1024 * 1024) {
+      alert(`File size exceeds ${MAX_UPLOAD_SIZE_MB}MB. Please choose a smaller image.`);
       return;
     }
 
@@ -42,23 +46,22 @@ document.addEventListener('DOMContentLoaded', () => {
   function processImage(img) {
     let width = img.width;
     let height = img.height;
-    const max_size = 1000;
 
-    if (width > height) {
-      if (width > max_size) {
-        height *= max_size / width;
-        width = max_size;
-      }
-    } else {
-      if (height > max_size) {
-        width *= max_size / height;
-        height = max_size;
+    // Resize otomatis kalau terlalu besar
+    if (width > AUTO_RESIZE_LIMIT || height > AUTO_RESIZE_LIMIT) {
+      if (width > height) {
+        height *= AUTO_RESIZE_LIMIT / width;
+        width = AUTO_RESIZE_LIMIT;
+      } else {
+        width *= AUTO_RESIZE_LIMIT / height;
+        height = AUTO_RESIZE_LIMIT;
       }
     }
+
     canvas.width = width;
     canvas.height = height;
 
-    // Terapkan filter default untuk sedikit menajamkan & menambah detail
+    // Terapkan filter default untuk detail
     ctx.filter = "contrast(1.1) brightness(1.05)";
     ctx.drawImage(img, 0, 0, width, height);
     ctx.filter = "none";
